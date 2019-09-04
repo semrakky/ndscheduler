@@ -1,14 +1,15 @@
-# Additional dependencies for simple_scheduler only
-
-# This apns library's release version still doesn't support python 3.5!
-git+git://github.com/djacobs/PyAPNs.git#egg=PyAPNs
-
-requests
-
-# Uncomment this if you want to use Postgres as datastore
-#
-# psycopg2 == 2.6.1
-
-# Uncomment this if you want to use MySQL as datastore
-#
-# pymysql == 0.6.7
+APScheduler==3.6.1
+funcsigs==1.0.2
+future==0.17.1
+Jinja2==2.10.1
+MarkupSafe==1.1.1
+mock==3.0.5
+nose==1.3.7
+psycopg2==2.8.3
+python-dateutil==2.8.0
+pytz==2019.2
+PyYAML==5.1.2
+six==1.12.0
+SQLAlchemy==1.3.8
+tornado==5.1.1
+tzlocal==2.0.0

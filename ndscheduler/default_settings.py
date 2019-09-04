@@ -3,7 +3,6 @@
 import logging
 import os
 
-
 #
 # Development mode or production mode
 # If DEBUG is True, then auto-reload is enabled, i.e., when code is modified, server will be
@@ -24,7 +23,7 @@ APP_INDEX_PAGE = 'index.html'
 # Server setup
 #
 HTTP_PORT = 7777
-HTTP_ADDRESS = '127.0.0.1'
+HTTP_ADDRESS = os.getenv("HTTP_ADDRESS") or '127.0.0.1'
 
 TORNADO_MAX_WORKERS = 8
 
@@ -60,22 +59,27 @@ DATABASE_TABLENAMES = {
 
 # SQLite
 #
-DATABASE_CLASS = 'ndscheduler.corescheduler.datastore.providers.sqlite.DatastoreSqlite'
-DATABASE_CONFIG_DICT = {
-    'file_path': 'datastore.db'
-}
+# DATABASE_CLASS = 'ndscheduler.corescheduler.datastore.providers.sqlite.DatastoreSqlite'
+# # DATABASE_CONFIG_DICT = {
+# #     'file_path': 'datastore.db'
+# # }
 
 # Postgres
 #
-# DATABASE_CLASS = 'ndscheduler.corescheduler.datastore.providers.postgresql.DatastorePostgresql'
-# DATABASE_CONFIG_DICT = {
-#     'user': 'username',
-#     'password': '',
-#     'hostname': 'localhost',
-#     'port': 5432,
-#     'database': 'scheduler',
-#     'sslmode': 'disable'
-# }
+DATABASE_CLASS = 'ndscheduler.corescheduler.datastore.providers.postgres.DatastorePostgres'
+USER = os.getenv('USER') or 'postgres'
+PASSWORD = os.getenv('PASSWORD') or 'underadmin'
+HOSTNAME = os.getenv('HOSTNAME') or 'localhost'
+PORT = os.getenv('PORT') or 5432
+DATABASE_NAME = os.getenv('DATABASE_NAME')
+DATABASE_CONFIG_DICT = {
+    'user': USER,
+    'password': PASSWORD,
+    'hostname': HOSTNAME,
+    'port': int(PORT),
+    'database': DATABASE_NAME,
+    'sslmode': 'disable'
+}
 
 # MySQL
 #
@@ -96,7 +100,6 @@ SCHEDULER_CLASS = 'ndscheduler.corescheduler.core.base.BaseScheduler'
 # Set logging level
 #
 logging.getLogger().setLevel(logging.INFO)
-
 
 # Packages that contains job classes, e.g., simple_scheduler.jobs
 JOB_CLASS_PACKAGES = []

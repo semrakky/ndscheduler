@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+  scheduler:
+    image: b24/scheduler
+    build:
+      dockerfile: .docker/Dockerfile
+      context: .
+    restart: always
+    environment:
+      - USER=postgres
+      - PASSWORD=underadmin
+      - HOSTNAME=demo.bill24.net
+      - PORT=2424
+      - DATABASE_NAME=scheduler
+      - HTTP_ADDRESS=0.0.0.0
+    ports:
+      - 7777:7777
+volumes:
+  data:
