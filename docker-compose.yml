@@ -3,7 +3,7 @@ services:
   scheduler:
     image: b24/scheduler
     build:
-      dockerfile: .docker/Dockerfile
+      dockerfile: ./.docker/Dockerfile
       context: .
     restart: always
     environment:
@@ -13,6 +13,7 @@ services:
       - PORT=2424
       - DATABASE_NAME=scheduler
       - HTTP_ADDRESS=0.0.0.0
+      - NDSCHEDULER_SETTINGS_MODULE=simple_scheduler.settings
     ports:
       - 7777:7777
 volumes:
